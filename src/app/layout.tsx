@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import { SidebarNavFooter, SidebarNavHeader, SidebarNav, SidebarNavContent, SidebarNavlink, SidebarNavTitle } from "@/components/ui/Sidebar/Sidebar";
+import { Flame } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +17,29 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const classes = 'group-hover:text-zinc-50 min-w-4 min-h-4 size-4 text-zinc-500 transition duration-200'
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={cn(["flex w-full"], inter.className)}>
+        <SidebarNav>
+          <SidebarNavHeader>
+            <SidebarNavTitle>My App</SidebarNavTitle>
+          </SidebarNavHeader>
+          <SidebarNavContent>
+            <SidebarNavlink Icon={<Flame className={classes}/>} href="/">Home</SidebarNavlink>
+            <SidebarNavlink Icon={<Flame className={classes}/>} href="/">Gestao de custos</SidebarNavlink>
+            <SidebarNavlink Icon={<Flame className={classes}/>} href="/">Home</SidebarNavlink>
+            <SidebarNavlink Icon={<Flame className={classes}/>} href="/">Home</SidebarNavlink>
+            <SidebarNavlink Icon={<Flame className={classes}/>} href="/">Home</SidebarNavlink>
+          </SidebarNavContent>
+          <SidebarNavFooter>
+            <p className="line-clamp-1">© 2021 My App</p>
+          </SidebarNavFooter>
+        </SidebarNav>
+        <main className="flex-1 overflow-y-auto h-screen w-full">
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
